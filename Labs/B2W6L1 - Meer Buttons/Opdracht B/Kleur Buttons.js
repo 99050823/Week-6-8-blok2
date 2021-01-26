@@ -1,5 +1,4 @@
 var container = document.getElementById("container");
-var aantalButtons = 1;
 
 container.style.textAlign = "center";
 
