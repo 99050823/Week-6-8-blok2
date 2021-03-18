@@ -477,30 +477,105 @@ var words = [
 	"zaken",
 	"zeker",
 	"zever",
-    "zeeen"
+	"zeeen"
 ];
 
-var start = document.getElementById("Start");
-var woord = words[Math.floor(Math.random() * words.length)];
+var rndword = words[Math. floor(Math. random()*words. length)];
+console.log(rndword);
 
-var rndwoord = [];
-var inputWoord = [];
+var raadBttn = document.getElementById('raad');
+var randomWord = [];
+var inputWord = [];
+var splitPoging = [];
+var splitRndWord;
 
-start.onclick = startBttn;
+var row = 0;
 
-function randomWoord () {
+var raadCounter = 0;
 
-    document.getElementById("row1").firstElementChild.innerHTML = woord[0];
-	rndwoord.push(woord);
-	console.log(rndwoord);
+raadBttn.onclick = raad;
 
+function sections () {
+	splitRndWord = rndword.split("");
+	randomWord.push(splitRndWord);
+	console.log(randomWord);
 }
 
-function startBttn () {
+// Bord Genarator --------------------------------------------------------------------------------------------------------
+
+var container = document.getElementById("container");
+
+container.style.backgroundColor = "gray"
+container.style.marginLeft = "10cm";
+container.style.marginRight = "10cm";
+container.style.textAlign = "center";
+
+function bordGeneration () {
+	for(var j = 0; j < 5; j++){
+		for (let i = 0; i < 5; i++) {
+			var square = document.createElement('DIV');
+			square.setAttribute("id", "square_" + j + "_" + i);
+			container.appendChild(square);
+			
+			square.style.background = "white";
+			square.style.height = "100px";
+			square.style.width = "100px";
+			square.style.margin = "5px";    
+			square.style.border = "none";
+			square.style.display = "inline-block";
+			square.style.textAlign = "center";
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------------------------------------
+
+function input () {
+	var poging = prompt("Raad een woord");
+	splitPoging = poging.split("");
 	
-
-	rndwoord.push(document.getElementById("input").value);
-	console.log(inputWoord);
+	inputWord.push(splitPoging);
+	console.log(splitPoging)
 }
 
-randomWoord()
+function raad () {
+	input()
+	plaatsWoord()
+	check()
+
+	raadCounter++;
+
+}
+
+function plaatsWoord () {	
+
+	document.getElementById("square_" + row + "_" + "0").append(splitPoging[0]);
+	document.getElementById("square_" + row + "_" + "1").append(splitPoging[1]);
+	document.getElementById("square_" + row + "_" + "2").append(splitPoging[2]);
+	document.getElementById("square_" + row + "_" + "3").append(splitPoging[3]);
+	document.getElementById("square_" + row + "_" + "4").append(splitPoging[4]);
+
+}
+
+function check () {
+
+		for (let i = 0; i < 5; i++) {
+
+			if(splitPoging[i] == splitRndWord[i]) {
+
+				document.getElementById("square" + "_"+ row +"_"+ i).style.backgroundColor = "green";
+				console.log(row + "_" + i);
+				
+			} else {
+				
+				document.getElementById("square" + "_" + row + "_" + i).style.backgroundColor = "red";	
+				console.log(row + "_" + i);
+
+			}
+		}
+	
+	row++;
+}
+
+sections()
+bordGeneration()
