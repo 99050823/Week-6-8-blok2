@@ -532,6 +532,8 @@ function bordGeneration () {
 
 function input () {
 	var poging = prompt("Raad een woord");
+	checkforWin(poging);
+
 	splitPoging = poging.split("");
 	
 	inputWord.push(splitPoging);
@@ -542,8 +544,10 @@ function raad () {
 	input()
 	plaatsWoord()
 	check()
+	checkforWin()
 
 	raadCounter++;
+	console.log(raadCounter);
 
 }
 
@@ -573,8 +577,18 @@ function check () {
 
 			}
 		}
-	
+
 	row++;
+}
+
+function checkforWin (val) {
+
+	var poging = val;
+
+	if (poging == rndword) {
+		alert("Gewonnen");
+	}
+
 }
 
 sections()
