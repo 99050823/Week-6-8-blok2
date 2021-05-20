@@ -526,9 +526,21 @@ function bordGeneration () {
 			square.style.textAlign = "center";
 		}
 	}
+
+	beginLetters()
 }
 
 //------------------------------------------------------------------------------------------------------------------------
+
+function beginLetters () {
+
+	document.getElementById("square_0_0").append(rndword[0]);
+	document.getElementById("square_1_0").append(rndword[0]);
+	document.getElementById("square_2_0").append(rndword[0]);
+	document.getElementById("square_3_0").append(rndword[0]);
+	document.getElementById("square_4_0").append(rndword[0]);
+
+}
 
 function input () {
 	var poging = prompt("Raad een woord");
@@ -579,11 +591,15 @@ function check () {
 		}
 
 	row++;
+
+	var checkRndWord = splitRndWord;
+	console.log(checkRndWord);
+
 }
 
-function checkforWin (val) {
+function checkforWin (value) {
 
-	var poging = val;
+	var poging = value;
 
 	if (poging == rndword) {
 		alert("Gewonnen");
