@@ -565,15 +565,18 @@ function raad () {
 
 function plaatsWoord () {	
 
-	document.getElementById("square_" + row + "_" + "0").append(splitPoging[0]);
-	document.getElementById("square_" + row + "_" + "1").append(splitPoging[1]);
-	document.getElementById("square_" + row + "_" + "2").append(splitPoging[2]);
-	document.getElementById("square_" + row + "_" + "3").append(splitPoging[3]);
-	document.getElementById("square_" + row + "_" + "4").append(splitPoging[4]);
+	document.getElementById("square_" + row + "_" + "0").innerHTML = splitPoging[0];
+	document.getElementById("square_" + row + "_" + "1").innerHTML = splitPoging[1];
+	document.getElementById("square_" + row + "_" + "2").innerHTML = splitPoging[2];
+	document.getElementById("square_" + row + "_" + "3").innerHTML = splitPoging[3];
+	document.getElementById("square_" + row + "_" + "4").innerHTML = splitPoging[4];
 
 }
 
 function check () {
+
+	var checkRndWord = splitRndWord;
+	console.log(checkRndWord);
 
 		for (let i = 0; i < 5; i++) {
 
@@ -582,7 +585,7 @@ function check () {
 				document.getElementById("square" + "_"+ row +"_"+ i).style.backgroundColor = "green";
 				console.log(row + "_" + i);
 				
-			} else {
+			} if (splitPoging[i] != splitRndWord[i]) {
 				
 				document.getElementById("square" + "_" + row + "_" + i).style.backgroundColor = "red";	
 				console.log(row + "_" + i);
@@ -591,9 +594,6 @@ function check () {
 		}
 
 	row++;
-
-	var checkRndWord = splitRndWord;
-	console.log(checkRndWord);
 
 }
 
