@@ -480,7 +480,7 @@ var words = [
 	"zeeen"
 ];
 
-var rndword = words[Math. floor(Math. random()*words. length)];
+var rndword = words[Math.floor(Math. random()*words.length)];
 console.log(rndword);
 
 var raadBttn = document.getElementById('raad');
@@ -490,8 +490,6 @@ var splitPoging = [];
 var splitRndWord;
 
 var row = 0;
-
-var raadCounter = 0;
 
 raadBttn.onclick = raad;
 
@@ -524,6 +522,7 @@ function bordGeneration () {
 			square.style.border = "none";
 			square.style.display = "inline-block";
 			square.style.textAlign = "center";
+
 		}
 	}
 
@@ -534,16 +533,27 @@ function bordGeneration () {
 
 function beginLetters () {
 
-	document.getElementById("square_0_0").append(rndword[0]);
-	document.getElementById("square_1_0").append(rndword[0]);
-	document.getElementById("square_2_0").append(rndword[0]);
-	document.getElementById("square_3_0").append(rndword[0]);
-	document.getElementById("square_4_0").append(rndword[0]);
+	var square1 = document.getElementById("square_0_0");
+	var square2 = document.getElementById("square_1_0");
+	var square3 = document.getElementById("square_2_0");
+	var square4 = document.getElementById("square_3_0");
+	var square5 = document.getElementById("square_4_0");
+
+	square1.append(rndword[0]);
+	square2.append(rndword[0]);
+	square3.append(rndword[0]);
+	square4.append(rndword[0]);
+	square5.append(rndword[0]);
 
 }
 
 function input () {
 	var poging = prompt("Raad een woord");
+
+	if (poging == null) {
+		return;	
+	}
+
 	checkforWin(poging);
 
 	splitPoging = poging.split("");
@@ -557,41 +567,42 @@ function raad () {
 	plaatsWoord()
 	check()
 	checkforWin()
-
-	raadCounter++;
-	console.log(raadCounter);
-
 }
 
 function plaatsWoord () {	
 
-	document.getElementById("square_" + row + "_" + "0").innerHTML = splitPoging[0];
-	document.getElementById("square_" + row + "_" + "1").innerHTML = splitPoging[1];
-	document.getElementById("square_" + row + "_" + "2").innerHTML = splitPoging[2];
-	document.getElementById("square_" + row + "_" + "3").innerHTML = splitPoging[3];
-	document.getElementById("square_" + row + "_" + "4").innerHTML = splitPoging[4];
+	document.getElementById("square_" + row + "_" + "0").innerText = splitPoging[0];
+	document.getElementById("square_" + row + "_" + "1").innerText = splitPoging[1];
+	document.getElementById("square_" + row + "_" + "2").innerText = splitPoging[2];
+	document.getElementById("square_" + row + "_" + "3").innerText = splitPoging[3];
+	document.getElementById("square_" + row + "_" + "4").innerText = splitPoging[4];
 
 }
 
 function check () {
 
-	var checkRndWord = splitRndWord;
-	console.log(checkRndWord);
+	sections()
 
+	var checkRndWord = splitRndWord;
+	
 		for (let i = 0; i < 5; i++) {
 
-			if(splitPoging[i] == splitRndWord[i]) {
-
+			if (checkRndWord[i] == splitPoging[i]) {
+				
 				document.getElementById("square" + "_"+ row +"_"+ i).style.backgroundColor = "green";
-				console.log(row + "_" + i);
-				
-			} if (splitPoging[i] != splitRndWord[i]) {
-				
-				document.getElementById("square" + "_" + row + "_" + i).style.backgroundColor = "red";	
-				console.log(row + "_" + i);
+				checkRndWord.splice(i, 1, null);
 
-			}
+			} else if (checkRndWord.includes(splitPoging[i])) {
+				
+				document.getElementById("square" + "_"+ row +"_"+ i).style.backgroundColor = "yellow";
+
+			} else {
+
+				document.getElementById("square" + "_"+ row +"_"+ i).style.backgroundColor = "red";
+			} 
 		}
+
+		console.log(checkRndWord);
 
 	row++;
 
@@ -607,5 +618,4 @@ function checkforWin (value) {
 
 }
 
-sections()
 bordGeneration()
